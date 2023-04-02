@@ -1,21 +1,21 @@
-Shader "ShaderTest/Melt"
+Shader "ShaderTest/Melt"//æ¶ˆèæ•ˆæœ
 {
     Properties
     {
-    	_MainTex ("Texture", 2D) = "white" {}//Ö÷ÎÆÀí
-    	_NoiseTex("Noise", 2D) = "white" {}//ÔëÉùÎÆÀí
-    	_Threshold("Threshold", Range(0.0, 1.0)) = 0.5//ÏûÈÚ·§Öµ
-    	_EdgeLength("Edge Length", Range(0.0, 0.2)) = 0.1//±ßÔµ¿í¶È
-    	_EdgeFirstColor("First Edge Color", Color) = (1,1,1,1)//±ßÔµÑÕÉ«Öµ1
-    	_EdgeSecondColor("Second Edge Color", Color) = (1,1,1,1)//±ßÔµÑÕÉ«Öµ2
+    	_MainTex ("Texture", 2D) = "white" {}//ä¸»çº¹ç†
+    	_NoiseTex("Noise", 2D) = "white" {}//å™ªå£°çº¹ç†
+    	_Threshold("Threshold", Range(0.0, 1.0)) = 0.5//æ¶ˆèé˜€å€¼
+    	_EdgeLength("Edge Length", Range(0.0, 0.2)) = 0.1//è¾¹ç¼˜å®½åº¦
+    	_EdgeFirstColor("First Edge Color", Color) = (1,1,1,1)//è¾¹ç¼˜é¢œè‰²å€¼1
+    	_EdgeSecondColor("Second Edge Color", Color) = (1,1,1,1)//è¾¹ç¼˜é¢œè‰²å€¼2
 		[Toggle]_IsVerse("IsVerser",float) = 0
     }    
    SubShader
    {
-        Tags { "Queue"="Geometry" "RenderType"="Opaque" }//±êÇ©
+        Tags { "Queue"="Geometry" "RenderType"="Opaque" }//æ ‡ç­¾
         Pass
         {
-		    Cull Off //ÒªäÖÈ¾±³Ãæ±£Ö¤Ğ§¹ûÕıÈ· 
+		    Cull Off //è¦æ¸²æŸ“èƒŒé¢ä¿è¯æ•ˆæœæ­£ç¡® 
 
             CGPROGRAM
             #pragma vertex vert
@@ -23,7 +23,7 @@ Shader "ShaderTest/Melt"
             #include "UnityCG.cginc"
             
 
-            struct a2v//¶¥µã×ÅÉ«Æ÷ÊäÈë½á¹¹Ìå
+            struct a2v//é¡¶ç‚¹ç€è‰²å™¨è¾“å…¥ç»“æ„ä½“
 			{
 				float4 vertex : POSITION;
 				float2 uv : TEXCOORD0;
@@ -44,28 +44,28 @@ Shader "ShaderTest/Melt"
 			fixed4 _EdgeSecondColor;
 			float _IsVerse;
 			
-			v2f vert (a2v v)//¶¥µã×ÅÉ«Æ÷
+			v2f vert (a2v v)//é¡¶ç‚¹ç€è‰²å™¨
 			{
 				v2f o;
-				o.vertex = UnityObjectToClipPos(v.vertex);//½«¶¥µã×ø±ê±ä»¯µ½¼ô²Ã×ø±êÏµ
-				o.uvMainTex = TRANSFORM_TEX(v.uv, _MainTex);//½øĞĞÖ÷ÎÆÀí×ø±ê±ä»»
-				o.uvNoiseTex = TRANSFORM_TEX(v.uv, _NoiseTex);//½øĞĞÔëÉùÎÆÀí×ø±ê±ä»»
+				o.vertex = UnityObjectToClipPos(v.vertex);//å°†é¡¶ç‚¹åæ ‡å˜åŒ–åˆ°å‰ªè£åæ ‡ç³»
+				o.uvMainTex = TRANSFORM_TEX(v.uv, _MainTex);//è¿›è¡Œä¸»çº¹ç†åæ ‡å˜æ¢
+				o.uvNoiseTex = TRANSFORM_TEX(v.uv, _NoiseTex);//è¿›è¡Œå™ªå£°çº¹ç†åæ ‡å˜æ¢
 				return o;
 			}
 			
-	        fixed4 frag (v2f i) : SV_Target//Æ¬Ôª×ÅÉ«Æ÷
+	        fixed4 frag (v2f i) : SV_Target//ç‰‡å…ƒç€è‰²å™¨
 			{
-				fixed cutout = tex2D(_NoiseTex, i.uvNoiseTex).r;//»ñÈ¡»Ò¶ÈÍ¼µÄRÍ¨µÀ
-				if(_IsVerse==1)//Ôö¼ÓÑ¡ÖĞ·´×ª
+				fixed cutout = tex2D(_NoiseTex, i.uvNoiseTex).r;//è·å–ç°åº¦å›¾çš„Ré€šé“
+				if(_IsVerse==1)//å¢åŠ é€‰ä¸­åè½¬
 				    cutout = 1- cutout;
-				clip(cutout - _Threshold);//¸ù¾İÏûÈÚ·§Öµ²Ã¼ôÆ¬Ôª
+				clip(cutout - _Threshold);//æ ¹æ®æ¶ˆèé˜€å€¼è£å‰ªç‰‡å…ƒ
 
-				float degree = saturate((cutout - _Threshold) / _EdgeLength);//¹æ·¶»¯
-				fixed4 edgeColor = lerp(_EdgeFirstColor, _EdgeSecondColor, degree);//¶ÔÑÕÉ«Öµ½øĞĞ²åÖµ
+				float degree = saturate((cutout - _Threshold) / _EdgeLength);//è§„èŒƒåŒ–
+				fixed4 edgeColor = lerp(_EdgeFirstColor, _EdgeSecondColor, degree);//å¯¹é¢œè‰²å€¼è¿›è¡Œæ’å€¼
 
-				fixed4 col = tex2D(_MainTex, i.uvMainTex);//¶ÔÖ÷ÎÆÀí½øĞĞ²ÉÑù
+				fixed4 col = tex2D(_MainTex, i.uvMainTex);//å¯¹ä¸»çº¹ç†è¿›è¡Œé‡‡æ ·
 
-				fixed4 finalColor = lerp(edgeColor, col, degree);//¶Ô±ßÔµÑÕÉ«ÓëÆ¬ÔªÑÕÉ«½øĞĞ²åÖµ
+				fixed4 finalColor = lerp(edgeColor, col, degree);//å¯¹è¾¹ç¼˜é¢œè‰²ä¸ç‰‡å…ƒé¢œè‰²è¿›è¡Œæ’å€¼
 				return fixed4(finalColor.rgb, 1);
 			}
             ENDCG
