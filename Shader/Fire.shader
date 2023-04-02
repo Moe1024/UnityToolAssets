@@ -1,8 +1,8 @@
-Shader "Myshader/Fire"
+Shader "Myshader/Fire"//ç«ç„°
 {
 	Properties
 	{
-		//ÔëÒôÎÆÀíÁ÷¶¯ËÙ¶È
+		//å™ªéŸ³çº¹ç†æµåŠ¨é€Ÿåº¦
 		_SpeedY("SpeedY", Range(-10,10)) = 1
  
 		_NoiseTex("Noise Texture", 2D) = "white" {}
@@ -17,7 +17,7 @@ Shader "Myshader/Fire"
 		LOD 100
 		//Zwrite Off 
 		//Cull Off
-		Blend SrcAlpha OneMinusSrcAlpha// ´«Í³Í¸Ã÷¶È
+		Blend SrcAlpha OneMinusSrcAlpha// ä¼ ç»Ÿé€æ˜åº¦
 		
  
 	Pass
@@ -57,7 +57,7 @@ Shader "Myshader/Fire"
  
 	fixed4 frag(v2f i) : SV_Target
 	{
-	    float4 gradientBlend = lerp(float4(1,1,1,1), float4(0, 0.3, 0.5, 0), i.uv.y * _Height);//ÓÃÒ»¸ö fixed Öµ×÷ÎªÒ»Ìõ±ß½çÀ´ÏŞÖÆ×¡ uv ´¹Ö±·½ÏòÉÏµÄÃ÷°µÑÕÉ«Öµ
+	    float4 gradientBlend = lerp(float4(1,1,1,1), float4(0, 0.3, 0.5, 0), i.uv.y * _Height);//ç”¨ä¸€ä¸ª fixed å€¼ä½œä¸ºä¸€æ¡è¾¹ç•Œæ¥é™åˆ¶ä½ uv å‚ç›´æ–¹å‘ä¸Šçš„æ˜æš—é¢œè‰²å€¼
 		float4 result = gradientBlend  * tex2D(_NoiseTex, fixed2(i.uv.x , (i.uv.y + _SpeedY) - _Time.x)) * 3;
 		return result * _MainColor;
 	}
