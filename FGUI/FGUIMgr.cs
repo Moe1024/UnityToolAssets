@@ -44,7 +44,7 @@ public class FGUIMgr : MonoBehaviour
         string panelName = typeof(T).Name;
         T panel = PanelDirectory[panelName] as T;
         panel.visible = isShow;
-        panel.OnShow();//触发 T 类的 OnShow() 函数
+        if(isShow)panel.OnShow();//触发 T 类的 OnShow() 函数
         return panel;
     }
     public T GetPanel<T>() where T : PanelBase
