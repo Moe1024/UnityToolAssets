@@ -1,0 +1,111 @@
+function Awake()
+end
+
+function Start()
+    OnClick_SwitchDressType(0)
+end
+
+function Update()
+end
+
+--Start时执行以下
+function Ani_DressTypeButton(index)
+    for i = 0, self.buttons_DressTypes.Length - 1 do
+        self.buttons_DressTypes[i].transform.localScale = CS.UnityEngine.Vector3.one
+    end
+
+    local scale = self.buttons_DressTypes[index].transform.localScale
+    scale.x = scale.x * 1.5
+    self.buttons_DressTypes[index].transform.localScale = scale
+
+    local switch = {
+        [0] = function()
+            self.currentDressType = CS.ClothesLua.DressType.Headdress
+        end,
+        function()
+            self.currentDressType = CS.ClothesLua.DressType.Clothes
+        end,
+        function()
+            self.currentDressType = CS.ClothesLua.DressType.Trousers
+        end,
+        function()
+            self.currentDressType = CS.ClothesLua.DressType.Shoe
+        end,
+    }
+
+    local switchFunc = switch[index]
+    if switchFunc then switchFunc() end
+end
+
+function OnClick_SwitchDressType(index)
+    Ani_DressTypeButton(index);
+    local switch = {
+        [0] = function()
+            ShowItemIcon(CS.ClothesLua.Role.I.headdresses, CS.ClothesLua.DressType.Headdress)
+        end,
+        [1] = function()
+            ShowItemIcon(CS.ClothesLua.Role.I.clotheses, CS.ClothesLua.DressType.Clothes)
+        end,
+        [2] = function()
+            ShowItemIcon(CS.ClothesLua.Role.I.trouserses, CS.ClothesLua.DressType.Trousers)
+        end,
+        [3] = function()
+            ShowItemIcon(CS.ClothesLua.Role.I.shoes, CS.ClothesLua.DressType.Shoe)
+        end,
+    }
+    --print("index"..index)
+    local switchFunc = switch[index]
+    if switchFunc then switchFunc() end
+end
+
+function ShowItemIcon(array, type)
+    for i = 0, self.buttons_Items.Length - 1 do
+        self.buttons_Items[i]:SetActive(false)
+    end
+
+    --print("times" .. 123)
+
+    for i = 0, array.Length - 1 do
+        self.buttons_Items[i]:SetActive(true)
+
+        local text = self.buttons_Items[i]:GetComponentInChildren(typeof(CS.TMPro.TextMeshProUGUI))
+        text.color = self.itemColors[i]
+
+        local switch = {
+            [CS.ClothesLua.DressType.Headdress] = function()
+                text.text = "H"
+            end,
+            [CS.ClothesLua.DressType.Clothes] = function()
+                text.text = "C"
+            end,
+            [CS.ClothesLua.DressType.Trousers] = function()
+                text.text = "T"
+            end,
+            [CS.ClothesLua.DressType.Shoe] = function()
+                text.text = "S"
+            end,
+        }
+
+        local switchFunc = switch[type]
+        if switchFunc then switchFunc() end
+    end
+end
+
+function OnClick_SlectItem(index)
+    local switch = {
+        [CS.ClothesLua.DressType.Headdress] = function()
+            CS.ClothesLua.Role.I:ChangeDress(CS.ClothesLua.Role.I.headdresses, CS.ClothesLua.DressType.Headdress, index)
+        end,
+        [CS.ClothesLua.DressType.Clothes] = function()
+            CS.ClothesLua.Role.I:ChangeDress(CS.ClothesLua.Role.I.clotheses, CS.ClothesLua.DressType.Clothes, index)
+        end,
+        [CS.ClothesLua.DressType.Trousers] = function()
+            CS.ClothesLua.Role.I:ChangeDress(CS.ClothesLua.Role.I.trouserses, CS.ClothesLua.DressType.Trousers, index)
+        end,
+        [CS.ClothesLua.DressType.Shoe] = function()
+            CS.ClothesLua.Role.I:ChangeDress(CS.ClothesLua.Role.I.shoes, CS.ClothesLua.DressType.Shoe, index)
+        end,
+    }
+    local switchFunc = switch[self.currentDressType]
+    if switchFunc then switchFunc() end
+end
