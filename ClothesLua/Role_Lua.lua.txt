@@ -1,0 +1,40 @@
+function Start()
+    --初始化默认的服装
+    local dressType=CS.ClothesLua.DressType
+    ChangeDress(self.headdresses, dressType.Headdress)
+    ChangeDress(self.clotheses, dressType.Clothes)
+    ChangeDress(self.trouserses, dressType.Trousers)
+    ChangeDress(self.shoes, dressType.Shoe)
+end
+
+--换装方法
+function ChangeDress(dresses, type, index)
+    if index == nil then
+        index = 0
+    end
+
+    for i = 0, dresses.Length-1 do
+        if i~= index then
+            dresses[i]:SetActive(false)
+        end
+    end
+    dresses[index]:SetActive(true)
+
+    local dressType=CS.ClothesLua.DressType
+    local switch = {
+        [dressType.Headdress]=function ()
+            self.currentHeaddressIndex = index
+        end,
+        [dressType.Clothes]=function ()
+            self.currentHeaddressIndex = index
+        end,
+        [dressType.Trousers]=function ()
+            self.currentHeaddressIndex = index
+        end,
+        [dressType.Shoe]=function ()
+            self.currentHeaddressIndex = index
+        end,
+    }
+    local switchFunc = switch[type]
+        if switchFunc then switchFunc() end
+end
