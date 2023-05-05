@@ -42,7 +42,8 @@ Shader "Custom/ToonShader"//NPR 卡通渲染
             float4 _Color;
             float _Detail;
 
-            float Toon(float3 normal, float3 lightDir) {//卡通渲染方法，传入法线及光照强度
+            float Toon(float3 normal, float3 lightDir) //卡通渲染方法，传入法线及光照强度
+            {
                 float NdotL = max(0, dot(normalize(normal), normalize(lightDir)));//计算得出被光照着的表面，俩向量点乘返回一个 float 值
 
                 return floor(NdotL / (1 - _Detail));//这个分数中，分母越小分层越多，分母越大分层越少。难道是计算不同大小的光照表面值的除法分出来的部分，而这个部分用floor()控制作为最高值而控制一块区域的颜色值？
