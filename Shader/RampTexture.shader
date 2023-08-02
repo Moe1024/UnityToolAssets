@@ -1,4 +1,4 @@
-//一维漫反射光照纹理贴图
+//涓�缁存极鍙嶅皠鍏夌収绾圭悊璐村浘
 Shader "Custom/Ramp Texture" {
 	Properties {
 		_Color ("Color Tint", Color) = (1, 1, 1, 1)
@@ -57,10 +57,10 @@ Shader "Custom/Ramp Texture" {
 				
 				// Use the texture to sample the diffuse color
 				fixed halfLambert  = 0.5 * dot(worldNormal, worldLightDir) + 0.5;
-				//利用半兰伯特光照对一维纹理图片进行采样，绘制得到物体背光面的阴影信息
+				//鍒╃敤鍗婂叞浼壒鍏夌収瀵逛竴缁寸汗鐞嗗浘鐗囪繘琛岄噰鏍凤紝缁樺埗寰楀埌鐗╀綋鑳屽厜闈㈢殑闃村奖淇℃伅
 				fixed3 diffuseColor = tex2D(_RampTex, fixed2(halfLambert, halfLambert)).rgb * _Color.rgb;
 				
-				fixed3 diffuse = _LightColor0.rgb * halfLambert;
+				fixed3 diffuse = _LightColor0.rgb * diffuseColor;
 				
 				fixed3 viewDir = normalize(UnityWorldSpaceViewDir(i.worldPos));
 				fixed3 halfDir = normalize(worldLightDir + viewDir);
