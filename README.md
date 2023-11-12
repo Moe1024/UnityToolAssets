@@ -11,8 +11,6 @@ Upload FGUIMgr.cs
 ![img](https://github.com/Moe1024/UnityToolAssets/blob/main/gif/AIBTree.gif)
 # Socket:
 ![img](https://github.com/Moe1024/UnityToolAssets/blob/main/gif/Socket.gif)
-# ClothesLua:
-![img](https://github.com/Moe1024/UnityToolAssets/blob/main/gif/ClothesLua.gif)
 # Draw:
 ![img](https://github.com/Moe1024/UnityToolAssets/blob/main/gif/Draw.gif)
 # NPCEditor:
