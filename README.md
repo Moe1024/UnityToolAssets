@@ -1,6 +1,6 @@
 # UnityToolAssets
 # Update data
-2024.9.20：Upload PlayerAni.cs etc.  
+2024.9.20：Upload PlayerAni.cs, AssetBundleManager.cs, HybirdHotUpdateManager.cs etc.  
 <br> 2023.7.31：Upload ImageSequenceAnimation.shader etc.  
 <br> 2023.5.4: Upload UnityToolAssets/Socket, UnityToolAssets/AIBehaviourTree  
 <br> 2023.4.16: Upload ReflectedRaycast.cs, NPCEditor.cs  
