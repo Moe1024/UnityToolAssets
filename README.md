@@ -1,12 +1,15 @@
 # UnityToolAssets
 # Update data
-2023.7.31：Upload ImageSequenceAnimation.shader etc.  
+2024.9.20：Upload PlayerAni.cs etc. 
+<br>2023.7.31：Upload ImageSequenceAnimation.shader etc.  
 <br> 2023.5.4: Upload UnityToolAssets/Socket, UnityToolAssets/AIBehaviourTree  
 <br> 2023.4.16: Upload ReflectedRaycast.cs, NPCEditor.cs  
 <br> 2023.4.15: Upload DrawLine.cs  
 <br> 2023.4.2: Upload Fire.shader, Melt.shader, ToonShader.shader  
 Upload FGUIMgr.cs
 
+# ARPGFight PlayerAni:
+![img](https://github.com/Moe1024/ARPGFight/AniShow.gif)
 # AIBehaviourTree:
 ![img](https://github.com/Moe1024/UnityToolAssets/blob/main/gif/AIBTree.gif)
 # Socket:
