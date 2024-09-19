@@ -5,8 +5,7 @@
 <br> 2023.5.4: Upload UnityToolAssets/Socket, UnityToolAssets/AIBehaviourTree  
 <br> 2023.4.16: Upload ReflectedRaycast.cs, NPCEditor.cs  
 <br> 2023.4.15: Upload DrawLine.cs  
-<br> 2023.4.2: Upload Fire.shader, Melt.shader, ToonShader.shader  
-Upload FGUIMgr.cs
+<br> 2023.4.2: Upload Fire.shader, Melt.shader, ToonShader.shader, FGUIMgr.cs
 
 # ARPGFight PlayerAni:
 ![img](https://github.com/Moe1024/UnityToolAssets/blob/main/ARPGFight/AniShow.gif)
