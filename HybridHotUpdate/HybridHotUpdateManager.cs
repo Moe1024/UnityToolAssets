@@ -6,7 +6,7 @@ using System.IO;
 using System.Reflection;
 using UnityEngine.Networking;
 
-public class HybirdHotUpdateManager : MonoBehaviour
+public class HybridHotUpdateManager : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
