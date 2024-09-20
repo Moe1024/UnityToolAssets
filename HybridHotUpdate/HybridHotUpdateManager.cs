@@ -19,11 +19,13 @@ public class HybridHotUpdateManager : MonoBehaviour
 
     private void CallHotUpdateFun()
     {
-        //HotUpdateĞèÒªÏÈ´ò³ÉAssembly°´³ÌĞò¼¯²¢Ìí¼Ó½øProject settingÀïµÄHot Update Assembly DefinitionsÀï
+        //HotUpdateéœ€è¦å…ˆæ‰“æˆAssemblyæŒ‰ç¨‹åºé›†å¹¶æ·»åŠ è¿›Project settingé‡Œçš„Hot Update Assembly Definitionsé‡Œ
         Assembly hotUpdateAss = Assembly.Load(File.ReadAllBytes($"{Application.streamingAssetsPath}/HotUpdate.dll.bytes"));
 
         Type type = hotUpdateAss.GetType("TestHotUpdateNamespace.TestHotUpdate");
-        type.GetMethod("Hello").Invoke(null, null);
+        object personInstance = Activator.CreateInstance(type);
+        type.GetMethod("Hello").Invoke(personInstance, null);
+
 
     }
 
@@ -35,14 +37,14 @@ public class HybridHotUpdateManager : MonoBehaviour
 
         if (www.result == UnityWebRequest.Result.Success)
         {
-            // »ñÈ¡DLLÎÄ¼şµÄ×Ö½ÚÊı¾İ
+            // è·å–DLLæ–‡ä»¶çš„å­—èŠ‚æ•°æ®
             byte[] dllData = www.downloadHandler.data;
 
-            // »ñÈ¡StreamingAssetsÎÄ¼ş¼ĞµÄÂ·¾¶
+            // è·å–StreamingAssetsæ–‡ä»¶å¤¹çš„è·¯å¾„
             string streamingAssetsPath = Application.streamingAssetsPath;
             string dllPath = Path.Combine(streamingAssetsPath, dllName);
 
-            // ±£´æDLLÎÄ¼şµ½StreamingAssetsÎÄ¼ş¼Ğ
+            // ä¿å­˜DLLæ–‡ä»¶åˆ°StreamingAssetsæ–‡ä»¶å¤¹
             File.WriteAllBytes(dllPath, dllData);
 
             CallHotUpdateFun();
